@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uganda Homes & Apartments - Premium Real Estate Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        uganda: {
+                            black: '#000000',
+                            yellow: '#FCDC04',
+                            red: '#D90000'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.90) 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+    <!-- Top Announcement Bar (Admin Contact Details) -->
+    <div class="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-4">
+                <span class="flex items-center text-amber-400 font-semibold">
+                    <i class="fa-solid fa-headset mr-1.5"></i> Platform Support / Inquiries:
+                </span>
+                <a href="tel:0705070233" class="hover:text-amber-400 transition-colors flex items-center">
+                    <i class="fa-solid fa-phone text-xs mr-1"></i> 0705070233 (+256 705 070233)
+                </a>
+                <span class="hidden sm:inline text-slate-600">|</span>
+                <a href="mailto:kawooyagodfrey804@gmail.com" class="hidden sm:flex items-center hover:text-amber-400 transition-colors">
+                    <i class="fa-solid fa-envelope text-xs mr-1"></i> kawooyagodfrey804@gmail.com
+                </a>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-bold border border-amber-500/20">
+                    Uganda's #1 Property Hub
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 glass-header border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#" onclick="showSection('listings')" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-600 via-amber-500 to-yellow-400 flex items-center justify-center text-white shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-house-chimney text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-amber-600 via-amber-500 to-slate-900 dark:to-white bg-clip-text text-transparent">
+                            Uganda Homes
+                        </span>
+                        <span class="block text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                            & Apartments
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <button onclick="showSection('listings')" class="nav-link text-sm font-semibold hover:text-amber-500 transition-colors">
+                        Browse Properties
+                    </button>
+                    <button onclick="showSection('about')" class="nav-link text-sm font-semibold hover:text-amber-500 transition-colors">
+                        About Platform
+                    </button>
+                    <button onclick="showSection('contact')" class="nav-link text-sm font-semibold hover:text-amber-500 transition-colors">
+                        Contact Admin
+                    </button>
+                </nav>
+
+                <!-- Right Action Controls -->
+                <div class="flex items-center space-x-3">
+                    <button id="postPropertyBtn" onclick="handlePostPropertyClick()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 transition-all flex items-center">
+                        <i class="fa-solid fa-plus-circle mr-1.5 text-base"></i> Post Property
+                    </button>
+
+                    <!-- Auth Section: Dynamic JS populated -->
+                    <div id="authNavSection" class="flex items-center">
+                        <!-- Populated by JS: Login Button OR User Avatar Dropdown -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        <!-- HERO SECTION -->
+        <section id="heroSection" class="relative bg-slate-900 py-16 lg:py-24 overflow-hidden border-b border-slate-800">
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80" alt="Luxury Uganda Home" class="w-full h-full object-cover opacity-25">
+                <div class="absolute inset-0 hero-overlay"></div>
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                    Verified Landlords & Real Estate Agents Across Uganda
+                </span>
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight max-w-4xl mx-auto leading-tight">
+                    Find Your Dream Home or Apartment in Uganda
+                </h1>
+                <p class="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal">
+                    Rent or buy residential properties in Kampala, Wakiso, Entebbe, Jinja, Mbarara, and beyond with transparent UGX pricing.
+                </p>
+
+                <!-- Search Filter Card -->
+                <div class="mt-8 max-w-4xl mx-auto bg-white/95 dark:bg-slate-800/95 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-2xl text-left border border-slate-200/50 dark:border-slate-700">
+                    <form id="searchForm" onsubmit="handleSearch(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Location / District</label>
+                            <div class="relative">
+                                <i class="fa-solid fa-location-dot absolute left-3 top-3 text-slate-400"></i>
+                                <select id="searchLocation" class="w-full pl-9 pr-3 py-2.5 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                                    <option value="">All Locations in Uganda</option>
+                                    <option value="Kampala">Kampala (Kololo, Naguru, Bugolobi, etc.)</option>
+                                    <option value="Wakiso">Wakiso (Kira, Najeera, Gayaza)</option>
+                                    <option value="Entebbe">Entebbe</option>
+                                    <option value="Mukono">Mukono</option>
+                                    <option value="Jinja">Jinja</option>
+                                    <option value="Mbarara">Mbarara</option>
+                                    <option value="Gulu">Gulu</option>
+                                    <option value="Arua">Arua</option>
+                                    <option value="Mbale">Mbale</option>
+                                    <option value="Fort Portal">Fort Portal</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Listing Type</label>
+                            <div class="relative">
+                                <i class="fa-solid fa-key absolute left-3 top-3 text-slate-400"></i>
+                                <select id="searchType" class="w-full pl-9 pr-3 py-2.5 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                                    <option value="">Rent & Sale</option>
+                                    <option value="Rent">For Rent</option>
+                                    <option value="Sale">For Sale</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Max Budget (UGX)</label>
+                            <div class="relative">
+                                <i class="fa-solid fa-coins absolute left-3 top-3 text-slate-400"></i>
+                                <input type="number" id="searchMaxPrice" placeholder="e.g. 2,000,000" class="w-full pl-9 pr-3 py-2.5 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                            </div>
+                        </div>
+
+                        <div class="flex items-end">
+                            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2.5 rounded-xl shadow-md shadow-amber-500/20 transition-all flex items-center justify-center">
+                                <i class="fa-solid fa-magnifying-glass mr-2"></i> Search Listings
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- LISTINGS SECTION -->
+        <section id="listingsSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Filter Bar & Category Toggles -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                        Explore Available Properties
+                    </h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                        Contact verified landlords or agencies directly with zero middleman markups.
+                    </p>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap items-center gap-2 bg-slate-200/60 dark:bg-slate-800/60 p-1.5 rounded-xl border border-slate-300/40 dark:border-slate-700/50">
+                    <button onclick="filterCategory('all')" id="cat-all" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-amber-500 text-slate-950 shadow-sm">
+                        All
+                    </button>
+                    <button onclick="filterCategory('Rent')" id="cat-Rent" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 dark:text-slate-300 hover:text-amber-500">
+                        For Rent
+                    </button>
+                    <button onclick="filterCategory('Sale')" id="cat-Sale" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 dark:text-slate-300 hover:text-amber-500">
+                        For Sale
+                    </button>
+                    <button onclick="filterCategory('Individual')" id="cat-Individual" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 dark:text-slate-300 hover:text-amber-500">
+                        Individual Owners
+                    </button>
+                    <button onclick="filterCategory('Agency')" id="cat-Agency" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 dark:text-slate-300 hover:text-amber-500">
+                        Agencies
+                    </button>
+                </div>
+            </div>
+
+            <!-- Property Grid -->
+            <div id="propertyGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically populated by JS -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="noResultsState" class="hidden text-center py-16 bg-white dark:bg-slate-800/50 rounded-3xl border border-dashed border-slate-300 dark:border-slate-700 p-8 my-6">
+                <div class="w-16 h-16 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                    <i class="fa-solid fa-house-circle-xmark"></i>
+                </div>
+                <h3 class="text-xl font-bold">No Properties Match Your Search</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mt-2 max-w-md mx-auto">
+                    Try relaxing your filters or search criteria to view available listings across Uganda.
+                </p>
+                <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-slate-900 dark:bg-slate-700 text-white rounded-xl text-xs font-bold">
+                    Reset All Filters
+                </button>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="aboutSection" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 sm:p-12 border border-slate-200 dark:border-slate-700 shadow-xl">
+                <div class="max-w-3xl">
+                    <span class="text-xs font-bold text-amber-500 uppercase tracking-widest">About Our Platform</span>
+                    <h2 class="text-3xl font-extrabold mt-2 text-slate-900 dark:text-white">Empowering Real Estate Transparency in Uganda</h2>
+                    <p class="text-slate-600 dark:text-slate-300 mt-4 leading-relaxed">
+                        Uganda Homes & Apartments is built to connect property seekers directly with verified property landlords and certified real estate agencies across Uganda.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                        <div class="p-5 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800">
+                            <i class="fa-solid fa-id-card text-2xl text-amber-500 mb-3"></i>
+                            <h4 class="font-bold text-base">Mandatory Landlord Verification</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">All advertisers register with full names and contact numbers before posting properties.</p>
+                        </div>
+                        <div class="p-5 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-200/60 dark:border-slate-800">
+                            <i class="fa-solid fa-headset text-2xl text-amber-500 mb-3"></i>
+                            <h4 class="font-bold text-base">Dedicated Admin Oversight</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Platform administration is managed by central administration (0705070233) ensuring safety and assistance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT US SECTION (Dedicated Admin Details) -->
+        <section id="contactSection" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Admin Info Card -->
+                <div class="lg:col-span-5 bg-slate-900 text-white p-8 rounded-3xl relative overflow-hidden flex flex-col justify-between">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Platform Administration</span>
+                        <h2 class="text-3xl font-extrabold mt-2 text-white">Get in Touch with Site Admin</h2>
+                        <p class="text-slate-300 text-sm mt-3">
+                            Have questions regarding property postings, advertising on Uganda Homes & Apartments, or reporting fraudulent activity? Contact our main admin line directly.
+                        </p>
+
+                        <div class="mt-8 space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-phone text-xl"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-slate-400 font-medium block">Official Contact Number</span>
+                                    <a href="tel:0705070233" class="text-lg font-bold hover:text-amber-400 transition-colors">0705070233</a>
+                                    <span class="block text-xs text-slate-400 mt-0.5">(+256 705 070233)</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-slate-400 font-medium block">Official Email Address</span>
+                                    <a href="mailto:kawooyagodfrey804@gmail.com" class="text-sm font-bold text-amber-300 hover:underline break-all">
+                                        kawooyagodfrey804@gmail.com
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-location-dot text-xl"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-slate-400 font-medium block">Headquarters</span>
+                                    <span class="text-sm font-semibold">Kampala, Uganda</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-slate-800 flex items-center justify-between">
+                        <span class="text-xs text-slate-400">Admin Hours: Mon - Sat (8am - 6pm)</span>
+                        <a href="https://wa.me/256705070233?text=Hello%20Admin,%20I%20have%20an%20inquiry%20regarding%20Uganda%20Homes%20%26%20Apartments" target="_blank" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs flex items-center shadow-lg shadow-emerald-900/30">
+                            <i class="fa-brands fa-whatsapp mr-1.5 text-base"></i> WhatsApp Admin
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Direct Admin Message Form -->
+                <div class="lg:col-span-7 bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-xl">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Send Admin a Direct Inquiry</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">Fill out the message form below and it will route directly to site administration.</p>
+
+                    <form onsubmit="handleAdminContactSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Your Full Name</label>
+                                <input type="text" id="contactName" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Your Phone Number</label>
+                                <input type="tel" id="contactPhone" placeholder="0700000000" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Subject</label>
+                            <input type="text" id="contactSubject" placeholder="General Inquiry / Listing Assistance / Fraud Report" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Message</label>
+                            <textarea id="contactMessage" rows="4" required placeholder="Write your message here..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:ring-2 focus:ring-amber-500 outline-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-3 rounded-xl shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center">
+                            <i class="fa-solid fa-paper-plane mr-2"></i> Submit Inquiry to Admin
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- AUTH MODAL (Login / Register) -->
+    <div id="authModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+            <!-- Modal Close Button -->
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Auth Header Tabs -->
+            <div class="flex border-b border-slate-200 dark:border-slate-800 mb-6">
+                <button onclick="switchAuthTab('login')" id="loginTabBtn" class="w-1/2 py-3 text-sm font-bold border-b-2 border-amber-500 text-amber-500">
+                    Log In
+                </button>
+                <button onclick="switchAuthTab('register')" id="registerTabBtn" class="w-1/2 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-600">
+                    Register Account
+                </button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Email Address</label>
+                    <input type="email" id="loginEmail" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Password</label>
+                    <input type="password" id="loginPassword" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+                <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-500/20 transition-all">
+                    Log In
+                </button>
+            </form>
+
+            <!-- REGISTER FORM -->
+            <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-3 hidden">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Full Name / Company Name *</label>
+                    <input type="text" id="regName" placeholder="e.g. Kawooya Godfrey / Prime Haven Ltd" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Account Type *</label>
+                    <select id="regType" onchange="toggleCompanyFields()" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                        <option value="Individual">Individual Landlord / Owner</option>
+                        <option value="Agency">Real Estate Agency / Company</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Contact Phone Number (Used on Listings) *</label>
+                    <input type="tel" id="regPhone" placeholder="0700000000 or +256700000000" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Email Address *</label>
+                    <input type="email" id="regEmail" placeholder="yourname@gmail.com" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+
+                <div id="companyLicenseContainer" class="hidden">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Company License / Reg Number</label>
+                    <input type="text" id="regLicense" placeholder="REA-2026-UG" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Password *</label>
+                    <input type="password" id="regPassword" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-500/20 transition-all mt-2">
+                    Create Registered Account
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- POST PROPERTY MODAL (Restricted to Registered Users) -->
+    <div id="postPropertyModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl my-8 relative">
+            <button onclick="closePostModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-500">Registered Landlord Portal</span>
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white">Post Your Property Listing</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                    Your name and direct contact details will be displayed on this listing so clients can reach you directly.
+                </p>
+            </div>
+
+            <form id="postPropertyForm" onsubmit="handlePostPropertySubmit(event)" class="space-y-4">
+                <!-- Auto-populated Seller Banner -->
+                <div id="sellerAutoBanner" class="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-center justify-between text-xs">
+                    <div>
+                        <span class="text-slate-400 block">Listing Creator:</span>
+                        <span id="activeSellerName" class="font-bold text-amber-400">Loading...</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-slate-400 block">Display Phone:</span>
+                        <span id="activeSellerPhone" class="font-bold text-slate-200">Loading...</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Listing Category *</label>
+                        <select id="postType" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                            <option value="Rent">For Rent</option>
+                            <option value="Sale">For Sale</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Price in UGX *</label>
+                        <input type="number" id="postPrice" placeholder="e.g. 1500000" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Property Title *</label>
+                    <input type="text" id="postTitle" placeholder="e.g. Modern 2 BHK Apartment with Lake View" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">District / Location *</label>
+                        <input type="text" id="postLocation" placeholder="e.g. Naguru, Kampala" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Bedrooms</label>
+                        <input type="number" id="postBedrooms" value="2" min="0" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Bathrooms</label>
+                        <input type="number" id="postBathrooms" value="2" min="0" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">House Image Upload *</label>
+                    <input type="file" id="postImageFile" accept="image/*" onchange="previewImageUpload(event)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-600">
+                    <div id="imagePreviewContainer" class="mt-3 hidden relative rounded-2xl overflow-hidden max-h-48 border border-slate-700">
+                        <img id="imagePreview" src="" alt="Preview" class="w-full h-48 object-cover">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Property Description</label>
+                    <textarea id="postDescription" rows="3" placeholder="Describe key features, security, parking space, water & electricity access..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-amber-500 outline-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Publish Listing Now
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PROPERTY DETAIL MODAL -->
+    <div id="detailModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-3xl w-full my-8 overflow-hidden shadow-2xl relative">
+            <button onclick="closeDetailModal()" class="absolute top-4 right-4 z-20 bg-slate-900/60 text-white hover:bg-slate-900 p-2 rounded-full transition-all">
+                <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+
+            <div id="detailContent">
+                <!-- Dynamically populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 pt-12 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-800">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center text-slate-950 font-bold">
+                            <i class="fa-solid fa-house-chimney text-sm"></i>
+                        </div>
+                        <span class="text-white font-extrabold text-lg">Uganda Homes</span>
+                    </div>
+                    <p class="text-xs text-slate-400">
+                        Connecting verified landlords and real estate buyers/tenants across Uganda seamlessly.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Quick Links</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" onclick="showSection('listings')" class="hover:text-amber-400">Browse Properties</a></li>
+                        <li><a href="#" onclick="showSection('about')" class="hover:text-amber-400">About Platform</a></li>
+                        <li><a href="#" onclick="showSection('contact')" class="hover:text-amber-400">Site Administration</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Site Admin Contacts</h4>
+                    <p class="text-xs text-slate-400 mb-1">Phone: <a href="tel:0705070233" class="text-amber-400 font-bold">0705070233</a></p>
+                    <p class="text-xs text-slate-400">Email: <a href="mailto:kawooyagodfrey804@gmail.com" class="text-amber-400 font-bold">kawooyagodfrey804@gmail.com</a></p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Covered Districts</h4>
+                    <p class="text-xs text-slate-400">Kampala, Entebbe, Wakiso, Mukono, Jinja, Mbarara, Gulu, Mbale, Fort Portal, and nationwide.</p>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+                <p>&copy; 2026 Uganda Homes & Apartments. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">Admin Enquiries: 0705070233 | kawooyagodfrey804@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // STRICT ADMIN CONSTANTS
+        const ADMIN_PHONE = "0705070233";
+        const ADMIN_EMAIL = "kawooyagodfrey804@gmail.com";
+
+        // MOCK INITIAL LISTINGS WITH INDIVIDUAL & AGENCY SELLERS
+        const initialProperties = [
+            {
+                id: "prop-101",
+                title: "Luxury 3 Bedroom Apartment with Swimming Pool",
+                type: "Rent",
+                priceUGX: 2500000,
+                location: "Kololo, Kampala",
+                bedrooms: 3,
+                bathrooms: 3,
+                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
+                description: "Spacious luxury apartment with modern interior finishes, 24/7 security guard, standby backup generator, swimming pool, and dedicated parking.",
+                seller: {
+                    name: "Kawooya Godfrey Properties",
+                    type: "Agency",
+                    phone: "0705070233",
+                    verified: true
+                },
+                createdAt: "2026-03-20"
+            },
+            {
+                id: "prop-102",
+                title: "Self Contained Single Bedroom House",
+                type: "Rent",
+                priceUGX: 650000,
+                location: "Najeera, Wakiso",
+                bedrooms: 1,
+                bathrooms: 1,
+                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+                description: "Clean self-contained double room with inside toilet and bathroom, water heater, paved compound, and individual power meter.",
+                seller: {
+                    name: "David Mukasa",
+                    type: "Individual",
+                    phone: "0772123456",
+                    verified: true
+                },
+                createdAt: "2026-03-22"
+            },
+            {
+                id: "prop-103",
+                title: "Prime Commercial Residential Plot & Bungalow",
+                type: "Sale",
+                priceUGX: 380000000,
+                location: "Entebbe Road, Wakiso",
+                bedrooms: 4,
+                bathrooms: 3,
+                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+                description: "Titled land with ready Mailo Title. Features a modern 4-bedroom bungalow with servant quarters and compound.",
+                seller: {
+                    name: "Sarah Namubiru",
+                    type: "Individual",
+                    phone: "0755987654",
+                    verified: true
+                },
+                createdAt: "2026-03-24"
+            }
+        ];
+
+        // APP STATE
+        let properties = [];
+        let currentUser = null;
+        let activeCategoryFilter = 'all';
+        let uploadedImageBase64 = '';
+
+        // INITIALIZATION
+        window.onload = function() {
+            loadAuthUser();
+            loadProperties();
+            renderAuthNav();
+            renderProperties();
+        };
+
+        // LOCAL STORAGE LOADERS
+        function loadProperties() {
+            const stored = localStorage.getItem('ug_properties');
+            if (stored) {
+                try {
+                    properties = JSON.parse(stored);
+                } catch(e) {
+                    properties = initialProperties;
+                }
+            } else {
+                properties = initialProperties;
+                localStorage.setItem('ug_properties', JSON.stringify(properties));
+            }
+        }
+
+        function loadAuthUser() {
+            const storedUser = localStorage.getItem('ug_active_user');
+            if (storedUser) {
+                try {
+                    currentUser = JSON.parse(storedUser);
+                } catch(e) {
+                    currentUser = null;
+                }
+            }
+        }
+
+        // AUTH UI NAVIGATION
+        function renderAuthNav() {
+            const container = document.getElementById('authNavSection');
+            if (currentUser) {
+                container.innerHTML = `
+                    <div class="relative group">
+                        <button class="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-2 rounded-xl text-xs font-bold transition-all">
+                            <div class="w-6 h-6 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-extrabold text-[10px]">
+                                ${currentUser.name.charAt(0).toUpperCase()}
+                            </div>
+                            <span class="max-w-[100px] truncate">${currentUser.name}</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                        </button>
+                        <div class="absolute right-0 mt-1 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 py-2 hidden group-hover:block z-50">
+                            <div class="px-4 py-2 border-b border-slate-100 dark:border-slate-700">
+                                <p class="text-xs font-bold truncate">${currentUser.name}</p>
+                                <p class="text-[10px] text-slate-400">${currentUser.phone}</p>
+                            </div>
+                            <button onclick="logoutUser()" class="w-full text-left px-4 py-2 text-xs text-red-500 hover:bg-slate-50 dark:hover:bg-slate-700/50 font-semibold">
+                                <i class="fa-solid fa-right-from-bracket mr-1.5"></i> Log Out
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <button onclick="openAuthModal('login')" class="text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:border-amber-500 transition-all">
+                        Log In
+                    </button>
+                `;
+            }
+        }
+
+        // NAVIGATION CONTROL
+        function showSection(section) {
+            document.getElementById('heroSection').classList.add('hidden');
+            document.getElementById('listingsSection').classList.add('hidden');
+            document.getElementById('aboutSection').classList.add('hidden');
+            document.getElementById('contactSection').classList.add('hidden');
+
+            if (section === 'listings') {
+                document.getElementById('heroSection').classList.remove('hidden');
+                document.getElementById('listingsSection').classList.remove('hidden');
+            } else if (section === 'about') {
+                document.getElementById('aboutSection').classList.remove('hidden');
+            } else if (section === 'contact') {
+                document.getElementById('contactSection').classList.remove('hidden');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // AUTH MODAL HANDLERS
+        function openAuthModal(tab = 'login') {
+            document.getElementById('authModal').classList.remove('hidden');
+            switchAuthTab(tab);
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.add('hidden');
+        }
+
+        function switchAuthTab(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const regForm = document.getElementById('registerForm');
+            const loginTabBtn = document.getElementById('loginTabBtn');
+            const registerTabBtn = document.getElementById('registerTabBtn');
+
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                regForm.classList.add('hidden');
+                loginTabBtn.className = "w-1/2 py-3 text-sm font-bold border-b-2 border-amber-500 text-amber-500";
+                registerTabBtn.className = "w-1/2 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-600";
+            } else {
+                loginForm.classList.add('hidden');
+                regForm.classList.remove('hidden');
+                registerTabBtn.className = "w-1/2 py-3 text-sm font-bold border-b-2 border-amber-500 text-amber-500";
+                loginTabBtn.className = "w-1/2 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-600";
+            }
+        }
+
+        function toggleCompanyFields() {
+            const type = document.getElementById('regType').value;
+            const container = document.getElementById('companyLicenseContainer');
+            if (type === 'Agency') {
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const type = document.getElementById('regType').value;
+            const phone = document.getElementById('regPhone').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+
+            if (!name || !phone || !email || !password) {
+                alert("Please fill in all required registration fields.");
+                return;
+            }
+
+            const newUser = { name, type, phone, email, password };
+            
+            // Save registered users list & active user
+            let users = JSON.parse(localStorage.getItem('ug_users') || "[]");
+            users.push(newUser);
+            localStorage.setItem('ug_users', JSON.stringify(users));
+
+            currentUser = newUser;
+            localStorage.setItem('ug_active_user', JSON.stringify(currentUser));
+
+            renderAuthNav();
+            closeAuthModal();
+            showCustomToast("Account Registered Successfully! You can now post properties.");
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            let users = JSON.parse(localStorage.getItem('ug_users') || "[]");
+            let found = users.find(u => u.email === email && u.password === password);
+
+            if (found) {
+                currentUser = found;
+                localStorage.setItem('ug_active_user', JSON.stringify(currentUser));
+                renderAuthNav();
+                closeAuthModal();
+                showCustomToast("Welcome back, " + currentUser.name + "!");
+            } else {
+                // Demo fallback if logging in for test
+                currentUser = {
+                    name: email.split('@')[0],
+                    type: "Individual",
+                    phone: "0700000000",
+                    email: email,
+                    password: password
+                };
+                localStorage.setItem('ug_active_user', JSON.stringify(currentUser));
+                renderAuthNav();
+                closeAuthModal();
+                showCustomToast("Logged in successfully!");
+            }
+        }
+
+        function logoutUser() {
+            currentUser = null;
+            localStorage.removeItem('ug_active_user');
+            renderAuthNav();
+            showCustomToast("Logged out successfully.");
+        }
+
+        function handlePostPropertyClick() {
+            if (!currentUser) {
+                alert("STRICT REQUIREMENT: You must first Register or Log In before posting a property!");
+                openAuthModal('register');
+                return;
+            }
+            openPostModal();
+        }
+
+        function openPostModal() {
+            document.getElementById('activeSellerName').innerText = currentUser.name + " (" + currentUser.type + ")";
+            document.getElementById('activeSellerPhone').innerText = currentUser.phone;
+            document.getElementById('postPropertyModal').classList.remove('hidden');
+        }
+
+        function closePostModal() {
+            document.getElementById('postPropertyModal').classList.add('hidden');
+        }
+
+        function previewImageUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    uploadedImageBase64 = evt.target.result;
+                    document.getElementById('imagePreview').src = uploadedImageBase64;
+                    document.getElementById('imagePreviewContainer').classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handlePostPropertySubmit(e) {
+            e.preventDefault();
+
+            if (!currentUser) {
+                alert("User session expired. Please log in first.");
+                openAuthModal('login');
+                return;
+            }
+
+            const title = document.getElementById('postTitle').value.trim();
+            const type = document.getElementById('postType').value;
+            const priceUGX = parseInt(document.getElementById('postPrice').value);
+            const location = document.getElementById('postLocation').value.trim();
+            const bedrooms = parseInt(document.getElementById('postBedrooms').value) || 1;
+            const bathrooms = parseInt(document.getElementById('postBathrooms').value) || 1;
+            const description = document.getElementById('postDescription').value.trim();
+
+            const image = uploadedImageBase64 || "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80";
+
+            const newProp = {
+                id: "prop-" + Date.now(),
+                title,
+                type,
+                priceUGX,
+                location,
+                bedrooms,
+                bathrooms,
+                image,
+                description: description || "No additional description provided.",
+                seller: {
+                    name: currentUser.name,
+                    type: currentUser.type,
+                    phone: currentUser.phone,
+                    verified: true
+                },
+                createdAt: new Date().toISOString().split('T')[0]
+            };
+
+            properties.unshift(newProp);
+            localStorage.setItem('ug_properties', JSON.stringify(properties));
+
+            renderProperties();
+            closePostModal();
+            showCustomToast("Property posted successfully!");
+
+            // Reset Form
+            document.getElementById('postPropertyForm').reset();
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
+            uploadedImageBase64 = '';
+        }
+
+        function formatUGX(num) {
+            return "UGX " + num.toLocaleString('en-US');
+        }
+
+        function renderProperties(filteredList = null) {
+            const list = filteredList || getCategoryFilteredList();
+            const grid = document.getElementById('propertyGrid');
+            const emptyState = document.getElementById('noResultsState');
+
+            grid.innerHTML = '';
+
+            if (list.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            list.forEach(prop => {
+                const isRent = prop.type === 'Rent';
+                const cleanPhone = prop.seller.phone.replace(/[^0-9]/g, '');
+                const formattedPhone = cleanPhone.startsWith('0') ? '256' + cleanPhone.substring(1) : cleanPhone;
+
+                const cardHtml = `
+                    <div class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-xl shadow-slate-200/50 dark:shadow-none hover:shadow-2xl transition-all flex flex-col group">
+                        <!-- Image & Badges -->
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="${prop.image}" alt="${prop.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-3 left-3 flex gap-2">
+                                <span class="px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider ${isRent ? 'bg-amber-500 text-slate-950' : 'bg-emerald-500 text-white'} shadow-md">
+                                    For ${prop.type}
+                                </span>
+                            </div>
+                            <div class="absolute bottom-3 left-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-xl text-white text-xs font-bold flex items-center justify-between">
+                                <span><i class="fa-solid fa-location-dot text-amber-400 mr-1"></i> ${prop.location}</span>
+                                <span class="text-amber-300 font-extrabold">${formatUGX(prop.priceUGX)}${isRent ? '/mo' : ''}</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-5 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-extrabold text-base text-slate-900 dark:text-white line-clamp-1 group-hover:text-amber-500 transition-colors">
+                                    ${prop.title}
+                                </h3>
+
+                                <div class="flex items-center space-x-4 text-xs text-slate-500 dark:text-slate-400 mt-2">
+                                    <span><i class="fa-solid fa-bed text-amber-500 mr-1"></i> ${prop.bedrooms} Beds</span>
+                                    <span><i class="fa-solid fa-bath text-amber-500 mr-1"></i> ${prop.bathrooms} Baths</span>
+                                </div>
+
+                                <!-- Registered Seller Credentials Card -->
+                                <div class="mt-4 p-3 bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-slate-200/70 dark:border-slate-800">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-7 h-7 rounded-full bg-slate-200 dark:bg-slate-700 text-amber-500 flex items-center justify-center font-bold text-xs">
+                                                <i class="fa-solid fa-user-check"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs font-bold text-slate-800 dark:text-slate-200">${prop.seller.name}</p>
+                                                <span class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">${prop.seller.type}</span>
+                                            </div>
+                                        </div>
+                                        <span class="text-[10px] bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded font-bold border border-emerald-500/20">
+                                            <i class="fa-solid fa-circle-check mr-1"></i> Verified
+                                        </span>
+                                    </div>
+                                    <p class="text-xs font-mono font-bold text-slate-600 dark:text-slate-400 mt-1.5 flex items-center">
+                                        <i class="fa-solid fa-phone text-[10px] mr-1.5 text-amber-500"></i> ${prop.seller.phone}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="mt-5 grid grid-cols-2 gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+                                <button onclick="openDetailModal('${prop.id}')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 rounded-xl text-xs font-bold transition-all flex items-center justify-center">
+                                    <i class="fa-solid fa-eye mr-1"></i> Details
+                                </button>
+                                <a href="https://wa.me/${formattedPhone}?text=Hello%20${encodeURIComponent(prop.seller.name)},%20I%20am%20interested%20in%20your%20property:%20${encodeURIComponent(prop.title)}" target="_blank" class="py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center shadow-md shadow-emerald-900/20">
+                                    <i class="fa-brands fa-whatsapp mr-1 text-sm"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        function filterCategory(cat) {
+            activeCategoryFilter = cat;
+
+            // Update Tab Button styles
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 dark:text-slate-300 hover:text-amber-500";
+            });
+            const activeBtn = document.getElementById(`cat-${cat}`);
+            if (activeBtn) {
+                activeBtn.className = "cat-btn px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-amber-500 text-slate-950 shadow-sm";
+            }
+
+            renderProperties();
+        }
+
+        function getCategoryFilteredList() {
+            if (activeCategoryFilter === 'all') return properties;
+            if (activeCategoryFilter === 'Rent' || activeCategoryFilter === 'Sale') {
+                return properties.filter(p => p.type === activeCategoryFilter);
+            }
+            if (activeCategoryFilter === 'Individual' || activeCategoryFilter === 'Agency') {
+                return properties.filter(p => p.seller.type === activeCategoryFilter);
+            }
+            return properties;
+        }
+
+        function handleSearch(e) {
+            e.preventDefault();
+            const loc = document.getElementById('searchLocation').value.toLowerCase();
+            const type = document.getElementById('searchType').value;
+            const maxPrice = parseInt(document.getElementById('searchMaxPrice').value) || Infinity;
+
+            const filtered = properties.filter(p => {
+                const matchLoc = !loc || p.location.toLowerCase().includes(loc);
+                const matchType = !type || p.type === type;
+                const matchPrice = p.priceUGX <= maxPrice;
+                return matchLoc && matchType && matchPrice;
+            });
+
+            renderProperties(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('searchForm').reset();
+            filterCategory('all');
+        }
+
+        function openDetailModal(id) {
+            const prop = properties.find(p => p.id === id);
+            if (!prop) return;
+
+            const isRent = prop.type === 'Rent';
+            const cleanPhone = prop.seller.phone.replace(/[^0-9]/g, '');
+            const formattedPhone = cleanPhone.startsWith('0') ? '256' + cleanPhone.substring(1) : cleanPhone;
+
+            const detailHtml = `
+                <div class="max-h-[85vh] overflow-y-auto">
+                    <img src="${prop.image}" alt="${prop.title}" class="w-full h-72 sm:h-96 object-cover">
+                    
+                    <div class="p-6 sm:p-8">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-xl text-xs font-black uppercase tracking-wider ${isRent ? 'bg-amber-500 text-slate-950' : 'bg-emerald-500 text-white'}">
+                                For ${prop.type}
+                            </span>
+                            <span class="text-2xl font-black text-amber-500">${formatUGX(prop.priceUGX)}${isRent ? '/month' : ''}</span>
+                        </div>
+
+                        <h2 class="text-2xl font-black text-slate-900 dark:text-white">${prop.title}</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1"><i class="fa-solid fa-location-dot text-amber-500 mr-1"></i> ${prop.location}</p>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 my-6 p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700">
+                            <div>
+                                <span class="text-[10px] text-slate-400 uppercase font-bold block">Bedrooms</span>
+                                <span class="text-sm font-bold text-slate-800 dark:text-slate-200"><i class="fa-solid fa-bed text-amber-500 mr-1"></i> ${prop.bedrooms}</span>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-400 uppercase font-bold block">Bathrooms</span>
+                                <span class="text-sm font-bold text-slate-800 dark:text-slate-200"><i class="fa-solid fa-bath text-amber-500 mr-1"></i> ${prop.bathrooms}</span>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-400 uppercase font-bold block">Posted Date</span>
+                                <span class="text-sm font-bold text-slate-800 dark:text-slate-200">${prop.createdAt}</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Description</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${prop.description}</p>
+                        </div>
+
+                        <!-- Direct Landlord Contact Box -->
+                        <div class="p-5 bg-amber-500/10 border border-amber-500/30 rounded-2xl">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <span class="text-[10px] font-bold text-amber-500 uppercase tracking-widest block">Direct Seller Contact</span>
+                                    <h4 class="text-lg font-black text-slate-900 dark:text-white">${prop.seller.name}</h4>
+                                    <span class="text-xs text-slate-400 font-semibold">${prop.seller.type}</span>
+                                </div>
+                                <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-lg text-xs font-bold border border-emerald-500/30">
+                                    <i class="fa-solid fa-shield-halved mr-1"></i> Verified Account
+                                </span>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <a href="tel:${prop.seller.phone}" class="py-3 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all flex items-center justify-center">
+                                    <i class="fa-solid fa-phone mr-2 text-amber-400"></i> Call ${prop.seller.phone}
+                                </a>
+                                <a href="https://wa.me/${formattedPhone}?text=Hello%20${encodeURIComponent(prop.seller.name)},%20I%20am%20inquiring%20about%20the%20property:%20${encodeURIComponent(prop.title)}" target="_blank" class="py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center">
+                                    <i class="fa-brands fa-whatsapp mr-2 text-base"></i> WhatsApp Direct
+                                </a>
+                                <a href="sms:${prop.seller.phone}?body=Hello,%20I%20saw%20your%20property%20listing:%20${encodeURIComponent(prop.title)}" class="py-3 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 rounded-xl text-xs font-bold transition-all flex items-center justify-center">
+                                    <i class="fa-solid fa-comment-sms mr-2"></i> Send SMS
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Admin Support Note -->
+                        <div class="mt-4 text-center">
+                            <p class="text-[11px] text-slate-500">
+                                Need platform assistance or reporting issues? Contact Site Admin at 
+                                <a href="tel:0705070233" class="text-amber-500 font-bold underline">0705070233</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('detailContent').innerHTML = detailHtml;
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+        }
+
+        // ADMIN MESSAGE SUBMIT HANDLER
+        function handleAdminContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const phone = document.getElementById('contactPhone').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+
+            // Direct WhatsApp route to Admin Phone 0705070233
+            const adminWhatsAppText = `*New Web Inquiry to Site Admin*%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Subject:* ${encodeURIComponent(subject)}%0A*Message:* ${encodeURIComponent(message)}`;
+            
+            window.open(`https://wa.me/256705070233?text=${adminWhatsAppText}`, '_blank');
+            
+            showCustomToast("Inquiry formatted! Opening WhatsApp to send directly to Admin (0705070233).");
+            e.target.reset();
+        }
+
+        // TOAST NOTIFICATION UTILITY
+        function showCustomToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 z-50 bg-slate-900 text-amber-400 border border-amber-500/30 px-5 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center space-x-2 animate-bounce';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-base text-amber-400"></i> <span>${msg}</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+    </script>
+</body>
+</html>
