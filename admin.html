@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Uganda Homes & Apartments</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+
+  <!-- Main Navigation Bar -->
+  <nav class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white">UG</div>
+      <h1 class="text-xl font-bold tracking-tight text-white">Uganda Homes <span class="text-blue-500">Admin</span></h1>
+    </div>
+    <span class="text-xs bg-slate-800 text-slate-400 px-3 py-1 rounded-full border border-slate-700">System Administrator</span>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-6 py-8 space-y-8">
+
+    <!-- Overview Analytics Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-sm">
+        <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Total Listings</p>
+        <p id="statTotal" class="text-3xl font-bold text-white mt-2">0</p>
+      </div>
+      <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-sm">
+        <p class="text-xs text-amber-400 font-medium uppercase tracking-wider">Pending NIN Audit</p>
+        <p id="statPending" class="text-3xl font-bold text-amber-400 mt-2">0</p>
+      </div>
+      <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-sm">
+        <p class="text-xs text-emerald-400 font-medium uppercase tracking-wider">Verified Landlords</p>
+        <p id="statVerified" class="text-3xl font-bold text-emerald-400 mt-2">0</p>
+      </div>
+      <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 shadow-sm">
+        <p class="text-xs text-blue-400 font-medium uppercase tracking-wider">Total Value (UGX)</p>
+        <p id="statValue" class="text-xl font-bold text-blue-400 mt-2">0 UGX</p>
+      </div>
+    </div>
+
+    <!-- Filters & Table Header Section -->
+    <div class="bg-slate-900 rounded-xl border border-slate-800 shadow-lg overflow-hidden">
+      <div class="p-5 border-b border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        
+        <!-- Filter Tabs -->
+        <div class="flex gap-2">
+          <button data-filter="all" class="filter-btn active bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition">All</button>
+          <button data-filter="pending" class="filter-btn bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium px-4 py-2 rounded-lg transition">Pending Verification</button>
+          <button data-filter="verified" class="filter-btn bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium px-4 py-2 rounded-lg transition">Verified Only</button>
+        </div>
+
+        <!-- Live Search Input -->
+        <div class="relative w-full md:w-72">
+          <input type="text" id="searchInput" placeholder="Search title, NIN, or landlord..." 
+                 class="w-full bg-slate-800 border border-slate-700 text-white text-sm rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+      </div>
+
+      <!-- Properties Table -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-slate-300">
+          <thead class="bg-slate-800/60 text-slate-400 uppercase text-xs tracking-wider border-b border-slate-800">
+            <tr>
+              <th class="px-6 py-4">Property</th>
+              <th class="px-6 py-4">Landlord Details</th>
+              <th class="px-6 py-4">NIN Record</th>
+              <th class="px-6 py-4">Price (UGX)</th>
+              <th class="px-6 py-4">Status</th>
+              <th class="px-6 py-4 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody" class="divide-y divide-slate-800">
+            <!-- Dynamic JS Table Rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- NIN Inspection Modal Popup -->
+  <div id="ninModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+      <h3 class="text-lg font-bold text-white border-b border-slate-800 pb-2">Landlord Identity Audit</h3>
+      <div id="modalContent" class="space-y-3 text-sm text-slate-300">
+        <!-- Injected via JS -->
+      </div>
+      <div class="flex justify-end gap-3 pt-4 border-t border-slate-800">
+        <button id="closeModalBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg text-sm font-medium transition">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
